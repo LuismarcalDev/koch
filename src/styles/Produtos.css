@@ -43,20 +43,23 @@ main{
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+     padding-left: 50px;
+    padding-right: 50px;
+   padding-top: 50px;
+   gap: 30px;
 
 }
 
-.login{
-    width: 700px;
-    height: 500px;
-    background-color: white;
-    box-shadow: 2px 5px 15px black;
-    display: flex;
-    flex-direction: row;
+.title-Produto h2{
+font-family: "poppins";
+font-weight: 600;
 }
-.login-adm{
-    width: 100%;
-    height: 100%;
+
+.title-Produto hr{
+    border: 2px #FDB83A solid;
+    width: 14%;
+}
+.centralProdutos{
+   
+
 }
