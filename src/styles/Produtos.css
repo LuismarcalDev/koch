@@ -160,7 +160,7 @@ width: 32px;
 }
 
 .conteudoCarrinho{
-    position: absolute;
+position: absolute;
 width: 380px;
 height: 470px;
 background-color: rgb(255, 255, 255);
@@ -169,6 +169,107 @@ left: -360px;
 z-index: 999;
 border-radius: 5px;
 box-shadow: 2px 5px 15px 7px rgba(0, 0, 0, 0.11);
+padding-left: 8px;
+padding-right: 8px;
+padding-top: 10px;
+padding-bottom: 8px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
 
+.cont-Produtos{
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.ProdutoCarrinho{
+
+}
+
+.title-Central h2{
+  font-family: "poppins";
+  font-weight: 500;
+  font-size: 18px;
+}
+.title-Central hr{
+    border: 2px solid #D89721;
+    width: 90%;
+    border-radius: 100px;
+}
+
+.ProdutoCarrinho{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.ProdutoCarrinho img{
+    width: 55px;
+    height: 70px;
+    border-radius: 4px;
+}
+.ProdutoCarrinho h4{
+    font-family: "poppins";
+    font-weight: 400;
+
+}
+#viuvi{
+       font-family: "Pontano Sans", sans-serif;
+       font-size: 12px;
+}
+
+#viuvi2{
+       font-family: "Pontano Sans", sans-serif;
+       font-size: 13px;
+       font-weight: bold;
+}
+
+#valor{
+    font-family: "poppins";
+}
+
+.val-Lixeira{
+display: flex;
+flex-direction: column;
+align-items: center;
+height: 100%;
+justify-content: space-between;
+}
+#lixeira{
+    position: relative;
+    top: -10px;
+    cursor: pointer;
+}
+
+#lixeira:hover{
+    position: relative;
+    top: -10px;
+    cursor: pointer;
+    color: rgb(163, 11, 11);
+    transition: 500ms;
+}
+.finalizar{
+display: flex;
+flex-direction: row;
+align-items: center;
+padding-left: 130px;
+gap: 10px;
+}
+.finalizar h2{
+    font-size: 16px;
+    font-family: "poppins";
+    font-weight: 400;
+
+}
+.btn-solo{
+    padding: 7px;
+    border: none;
+    background-color: #D89721;
+    color: white;
+    font-family: "poppins";
+    border-radius: 7px;
+    width: 100px;
 
 }
