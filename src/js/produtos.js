@@ -65,3 +65,36 @@ function Cart() {
     abrir = false;
   }
 }
+
+
+setTimeout(()=>{
+document.getElementById("popUp").style.display = "flex"
+
+},1000)
+
+function PopUp(){
+  document.getElementById("popUp").style.display = "none"
+}
+
+
+async function PopUpImg(){
+
+  const res = await fetch(`https://mck847sh.api.sanity.io/v2025-10-31/data/query/production?query=*%5B_type+%3D%3D+%22Promocao%22%5D%7B%0A++id%2C%0A++nome%2C%0A++preco%2C%0A++%22imagem%22%3A+imagem.asset-%3Eurl%2C%0A++descricao%0A%7D&perspective=drafts`)
+
+  const data = await res.json();
+  const imagemPopUp = data.result;
+
+  imagemPopUp.forEach((img)=>{
+    let imgs = img.imagem || "https://via.placeholder.com/200"
+      document.getElementById("imagePopUp").src = imgs;
+  })
+  
+
+
+
+  
+}
+
+PopUpImg()
+
+
