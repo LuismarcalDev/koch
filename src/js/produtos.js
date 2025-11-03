@@ -1,3 +1,10 @@
+let id = "";
+let valorSoma = [];
+let numero = 1;
+let abrir = false;
+
+document.addEventListener("DOMContentLoaded", carregarProdutos);
+
 async function carregarProdutos() {
   const res = await fetch(
     "https://mck847sh.api.sanity.io/v2025-10-30/data/query/production?query=*%5B_type+%3D%3D+%22Produtos%22%5D%7B%0A++id%2C%0A++nome%2C%0A++preco%2C%0A++%22imagem%22%3A+imagem.asset-%3Eurl%2C%0A++descricao%0A%7D%0A&perspective=drafts"
@@ -13,10 +20,6 @@ async function carregarProdutos() {
 
     const img = document.createElement("img");
     img.src = item.imagem || "https://via.placeholder.com/200";
-    img.addEventListener("click", () => {
-      let id = item.id;
-      console.log(id);
-    });
     produtoDiv.appendChild(img);
 
     const descDiv = document.createElement("div");
@@ -34,34 +37,106 @@ async function carregarProdutos() {
 
     const botao = document.createElement("button");
     botao.innerHTML = `Adicionar ao carrinho <i class="fa-solid fa-bowl-food"></i>`;
-    botao.addEventListener("click", Carrinho);
+    botao.addEventListener("click", () => ProdutoCarrinhoSolo(item.id));
     produtoDiv.appendChild(botao);
 
     container.appendChild(produtoDiv);
   });
 }
 
-async function CarrinhoSobre() {
+async function ProdutoCarrinhoSolo(id) {
+  document.getElementById("cart").style.height = "380px";
+
   const res = await fetch(
-    `'https://mck847sh.api.sanity.io/v2025-10-30/data/query/production?query=*%5B_type+%3D%3D+%22Produtos%22%5D%7B%0A++id%3C%0A++nome%2C%0A++preco%2C%0A++%22imagem%22%3A+imagem.asset-%3Eurl%2C%0A++descricao%0A%7D%0A&perspective=drafts'`
+    `https://mck847sh.api.sanity.io/v2025-10-31/data/query/production?query=*%5B_type+%3D%3D+%22Produtos%22+%26%26+id+%3D%3D+${id}%5D+%7B%0A++id%2C%0A++nome%2C%0A++preco%2C%0A++%22imagem%22%3A+imagem.asset-%3Eurl%2C%0A++descricao%0A%7D%0A&perspective=`
   );
-}
 
-document.addEventListener("DOMContentLoaded", carregarProdutos);
+  const data = await res.json();
+  const produtos = data.result;
+  const container = document.querySelector("#carts");
 
-let numero = 1;
-let abrir = false;
+produtos.forEach((item) => {
+  const container = document.querySelector("#carts");
 
-function Carrinho() {
+ 
+  const produtoExistente = container.querySelector(`[data-id='${item.id}']`);
+
+  if (produtoExistente) {
+  
+    const qtdEl = produtoExistente.querySelector("#viuvi2");
+    let qtdAtual = parseInt(qtdEl.textContent);
+    qtdEl.textContent = `${qtdAtual + 1}X`;
+
+  
+    valorSoma.push(item.preco);
+    let soma = valorSoma.reduce((total, v) => total + v, 0);
+    document.getElementById("valorReal").innerText = `Total R$ ${soma}`;
+    return; 
+  }
+
+ 
+  const div = document.createElement("div");
+  div.classList.add("ProdutoCarrinho");
+  div.setAttribute("data-id", item.id);
+
+  div.innerHTML = `
+    <img src="${item.imagem}" alt="${item.nome}" />
+    <div>
+      <h4>${item.nome}</h4>
+      <p id="viuvi">${item.descricao}</p>
+      <p id="viuvi2">1X</p>
+    </div>
+    <div class="val-Lixeira">
+      <p id="valor">R$${item.preco}</p>
+      <i id="lixeira" class="fa-solid fa-trash"></i>
+    </div>
+  `;
+
+
+  div.querySelector("#lixeira").addEventListener("click", () => {
+    const qtdEl = div.querySelector("#viuvi2");
+    let qtdAtual = parseInt(qtdEl.textContent);
+
+    if (qtdAtual > 1) {
+  
+      qtdEl.textContent = `${qtdAtual - 1}X`;
+
+    
+      const index = valorSoma.indexOf(item.preco);
+      if (index !== -1) valorSoma.splice(index, 1);
+    } else {
+  
+      div.remove();
+
+      const index = valorSoma.indexOf(item.preco);
+      if (index !== -1) valorSoma.splice(index, 1);
+    }
+
+
+    let soma = valorSoma.reduce((total, v) => total + v, 0);
+    document.getElementById("valorReal").innerText = `Total R$ ${soma}`;
+  });
+
+
+  valorSoma.push(item.preco);
+  let soma = valorSoma.reduce((total, v) => total + v, 0);
+  document.getElementById("valorReal").innerText = `Total R$ ${soma}`;
+
+  container.appendChild(div);
+});
+
+
+
   document.getElementById("carrinho").textContent = numero++;
 }
 
 function Cart() {
+  const cart = document.getElementById("cart");
   if (!abrir) {
-    document.getElementById("cart").style.display = "flex";
+    cart.style.display = "flex";
     abrir = true;
   } else {
-    document.getElementById("cart").style.display = "none";
+    cart.style.display = "none";
     abrir = false;
   }
 }

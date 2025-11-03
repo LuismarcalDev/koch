@@ -156,10 +156,11 @@ main {
 .conteudoCarrinho {
   position: absolute;
   width: 380px;
-  height: 470px;
+  
   background-color: rgb(255, 255, 255);
   top: 30px;
   left: -360px;
+
   z-index: 999;
   border-radius: 5px;
   box-shadow: 2px 5px 15px 7px rgba(37, 37, 37, 0.11);
@@ -176,6 +177,12 @@ main {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  
+}
+#cart{
+        
+      hyphens: auto;            
+    overflow-y: auto;  
 }
 
 .title-Central h2 {
@@ -243,7 +250,7 @@ main {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 130px;
+  justify-content: space-between;
   gap: 10px;
 }
 .finalizar h2 {
