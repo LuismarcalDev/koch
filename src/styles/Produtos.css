@@ -48,6 +48,7 @@ main {
   padding-right: 50px;
   padding-top: 50px;
   gap: 30px;
+  position: relative;
 }
 
 .title-Produto h2 {
@@ -70,7 +71,7 @@ main {
 
   position: relative;
   border-top-left-radius: 10px;
-  box-shadow: 2px 5px 15px 3px rgba(142, 142, 142, 0.11);
+  box-shadow: 2px 5px 15px 3px rgba(0, 0, 0, 0.158);
   border-top-right-radius: 10px;
 }
 .produto img {
