@@ -161,7 +161,7 @@ main {
   background-color: rgb(255, 255, 255);
   top: 30px;
   left: -360px;
-
+  
   z-index: 999;
   border-radius: 5px;
   box-shadow: 2px 5px 15px 7px rgba(37, 37, 37, 0.11);

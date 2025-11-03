@@ -1,9 +1,13 @@
 let id = "";
 let valorSoma = [];
+let arrayProdutos = [];
 let numero = 1;
 let abrir = false;
 
-document.addEventListener("DOMContentLoaded", carregarProdutos);
+document.addEventListener("DOMContentLoaded", () => {
+  carregarProdutos();
+  carregarCarrinhoLocal(); // carrega o carrinho salvo ao iniciar
+});
 
 async function carregarProdutos() {
   const res = await fetch(
@@ -55,79 +59,131 @@ async function ProdutoCarrinhoSolo(id) {
   const produtos = data.result;
   const container = document.querySelector("#carts");
 
-produtos.forEach((item) => {
-  const container = document.querySelector("#carts");
+  produtos.forEach((item) => {
+    const produtoExistente = container.querySelector(`[data-id='${item.id}']`);
 
- 
-  const produtoExistente = container.querySelector(`[data-id='${item.id}']`);
+    if (produtoExistente) {
+      const qtdEl = produtoExistente.querySelector("#viuvi2");
+      let qtdAtual = parseInt(qtdEl.textContent);
+      qtdEl.textContent = `${qtdAtual + 1}X`;
 
-  if (produtoExistente) {
-  
-    const qtdEl = produtoExistente.querySelector("#viuvi2");
-    let qtdAtual = parseInt(qtdEl.textContent);
-    qtdEl.textContent = `${qtdAtual + 1}X`;
-
-  
-    valorSoma.push(item.preco);
-    let soma = valorSoma.reduce((total, v) => total + v, 0);
-    document.getElementById("valorReal").innerText = `Total R$ ${soma}`;
-    return; 
-  }
-
- 
-  const div = document.createElement("div");
-  div.classList.add("ProdutoCarrinho");
-  div.setAttribute("data-id", item.id);
-
-  div.innerHTML = `
-    <img src="${item.imagem}" alt="${item.nome}" />
-    <div>
-      <h4>${item.nome}</h4>
-      <p id="viuvi">${item.descricao}</p>
-      <p id="viuvi2">1X</p>
-    </div>
-    <div class="val-Lixeira">
-      <p id="valor">R$${item.preco}</p>
-      <i id="lixeira" class="fa-solid fa-trash"></i>
-    </div>
-  `;
-
-
-  div.querySelector("#lixeira").addEventListener("click", () => {
-    const qtdEl = div.querySelector("#viuvi2");
-    let qtdAtual = parseInt(qtdEl.textContent);
-
-    if (qtdAtual > 1) {
-  
-      qtdEl.textContent = `${qtdAtual - 1}X`;
-
-    
-      const index = valorSoma.indexOf(item.preco);
-      if (index !== -1) valorSoma.splice(index, 1);
-    } else {
-  
-      div.remove();
-
-      const index = valorSoma.indexOf(item.preco);
-      if (index !== -1) valorSoma.splice(index, 1);
+      valorSoma.push(item.preco);
+      atualizarTotal();
+      salvarCarrinhoLocal();
+      return;
     }
 
+    const div = document.createElement("div");
+    div.classList.add("ProdutoCarrinho");
+    div.setAttribute("data-id", item.id);
 
-    let soma = valorSoma.reduce((total, v) => total + v, 0);
-    document.getElementById("valorReal").innerText = `Total R$ ${soma}`;
+    div.innerHTML = `
+      <img src="${item.imagem}" alt="${item.nome}" />
+      <div>
+        <h4>${item.nome}</h4>
+        <p id="viuvi">${item.descricao}</p>
+        <p id="viuvi2">1X</p>
+      </div>
+      <div class="val-Lixeira">
+        <p id="valor">R$${item.preco}</p>
+        <i id="lixeira" class="fa-solid fa-trash"></i>
+      </div>
+    `;
+
+    div.querySelector("#lixeira").addEventListener("click", () => {
+      const qtdEl = div.querySelector("#viuvi2");
+      let qtdAtual = parseInt(qtdEl.textContent);
+
+      if (qtdAtual > 1) {
+        qtdEl.textContent = `${qtdAtual - 1}X`;
+        const index = valorSoma.indexOf(item.preco);
+        if (index !== -1) valorSoma.splice(index, 1);
+      } else {
+        div.remove();
+        const index = valorSoma.indexOf(item.preco);
+        if (index !== -1) valorSoma.splice(index, 1);
+      }
+
+      atualizarTotal();
+      salvarCarrinhoLocal();
+    });
+
+    valorSoma.push(item.preco);
+    atualizarTotal();
+    container.appendChild(div);
+    salvarCarrinhoLocal();
   });
 
-
-  valorSoma.push(item.preco);
-  let soma = valorSoma.reduce((total, v) => total + v, 0);
-  document.getElementById("valorReal").innerText = `Total R$ ${soma}`;
-
-  container.appendChild(div);
-});
-
-
-
   document.getElementById("carrinho").textContent = numero++;
+}
+
+function atualizarTotal() {
+  let soma = valorSoma.reduce((total, v) => total + v, 0);
+  document.getElementById("valorReal").innerText = `Total R$ ${soma.toFixed(2)}`;
+}
+
+function salvarCarrinhoLocal() {
+  const itens = [];
+  const produtosNoCarrinho = document.querySelectorAll(".ProdutoCarrinho");
+
+  produtosNoCarrinho.forEach((p) => {
+    itens.push({
+      id: p.getAttribute("data-id"),
+      nome: p.querySelector("h4").textContent,
+      descricao: p.querySelector("#viuvi").textContent,
+      preco: parseFloat(p.querySelector("#valor").textContent.replace("R$", "")),
+      imagem: p.querySelector("img").src,
+      quantidade: parseInt(p.querySelector("#viuvi2").textContent),
+    });
+  });
+
+  localStorage.setItem("carrinho", JSON.stringify(itens));
+}
+
+function carregarCarrinhoLocal() {
+  const dados = localStorage.getItem("carrinho");
+  if (!dados) return;
+
+  const itens = JSON.parse(dados);
+  const container = document.querySelector("#carts");
+
+  itens.forEach((item) => {
+    const div = document.createElement("div");
+    div.classList.add("ProdutoCarrinho");
+    div.setAttribute("data-id", item.id);
+
+    div.innerHTML = `
+      <img src="${item.imagem}" alt="${item.nome}" />
+      <div>
+        <h4>${item.nome}</h4>
+        <p id="viuvi">${item.descricao}</p>
+        <p id="viuvi2">${item.quantidade}X</p>
+      </div>
+      <div class="val-Lixeira">
+        <p id="valor">R$${item.preco}</p>
+        <i id="lixeira" class="fa-solid fa-trash"></i>
+      </div>
+    `;
+
+    div.querySelector("#lixeira").addEventListener("click", () => {
+      const qtdEl = div.querySelector("#viuvi2");
+      let qtdAtual = parseInt(qtdEl.textContent);
+
+      if (qtdAtual > 1) {
+        qtdEl.textContent = `${qtdAtual - 1}X`;
+      } else {
+        div.remove();
+      }
+
+      salvarCarrinhoLocal();
+      atualizarTotal();
+    });
+
+    container.appendChild(div);
+    for (let i = 0; i < item.quantidade; i++) valorSoma.push(item.preco);
+  });
+
+  atualizarTotal();
 }
 
 function Cart() {
@@ -141,9 +197,31 @@ function Cart() {
   }
 }
 
+function Finalizar() {
+  const produtosNoCarrinho = document.querySelectorAll(".ProdutoCarrinho");
+  if (produtosNoCarrinho.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
+  }
 
+  let mensagem = "Oi, boa tarde!\nGostaria de fazer um pedido com os seguintes itens:\n";
+  let total = 0;
 
+  produtosNoCarrinho.forEach((produto) => {
+    const nome = produto.querySelector("h4").textContent;
+    const qtd = produto.querySelector("#viuvi2").textContent.replace("X", "");
+    const precoTexto = produto.querySelector("#valor").textContent.replace("R$", "");
+    const preco = parseFloat(precoTexto);
 
+    mensagem += `${qtd}x ${nome} - R$ ${preco.toFixed(2)}\n`;
+    total += preco * parseInt(qtd);
+  });
 
+  mensagem += `Total: R$ ${total.toFixed(2)}`;
 
+  const numero = "554598475180";
+  const mensagemEncode = encodeURIComponent(mensagem);
+  const link = `https://wa.me/${numero}?text=${mensagemEncode}`;
 
+  window.open(link, "_blank");
+}
