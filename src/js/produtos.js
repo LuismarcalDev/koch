@@ -21,7 +21,11 @@ async function carregarProdutos() {
   produtos.forEach((item) => {
     const produtoDiv = document.createElement("div");
     produtoDiv.classList.add("produto");
-    
+      ScrollReveal().reveal(".produto", {
+  origin: "top",
+  duration: 2000,
+  distance: "1%",
+  });
 
     const img = document.createElement("img");
     img.src = item.imagem || "https://via.placeholder.com/200";
