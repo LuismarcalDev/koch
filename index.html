@@ -11,13 +11,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+
     <title>Login</title>
   </head>
   <body>
@@ -34,7 +28,7 @@
       <div class="cesta10">
         <div style="display: flex; flex-direction: column; position: relative">
           <div class="solo">
-            <p id="carrinho" onclick="Cart()">0</p>
+            <p id="carrinho" style="font-family: poppins;" onclick="Cart()">0</p>
             <img src="src/img/cesta 1.png" alt="" onclick="Cart()" />
           </div>
 
@@ -44,15 +38,14 @@
               <hr />
             </div>
 
-            <div id="carts" class="cont-Produtos">
-
-        
-                
-               
-            </div>
+            <div id="carts" class="cont-Produtos"></div>
             <div class="finalizar">
               <h2 id="valorReal">Total R$ 00,00</h2>
-              <button style="cursor: pointer" class="btn-solo" onclick="Finalizar()">
+              <button
+                style="cursor: pointer"
+                class="btn-solo"
+                onclick="Finalizar()"
+              >
                 Finalizar
               </button>
             </div>
@@ -70,10 +63,7 @@
         <hr />
       </div>
 
-      
       <div class="centralProdutos"></div>
-     
-      
     </main>
     <script src="src/js/produtos.js"></script>
   </body>
