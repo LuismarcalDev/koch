@@ -55,7 +55,7 @@
           </div>
         </div>
 
-         <i id="menuIcon" class="fa-solid fa-caret-down"></i>
+         <i id="menuIcon" class="fa-solid fa-caret-down" onclick="sidebarOpen()"></i>
 
        
 
@@ -67,9 +67,9 @@
     </header>
 
     <main>
-        <div class="menu-responsive">
-            <div class="title-responsive">
-              <i class="fa-solid fa-caret-down fa-flip-vertical"></i>
+        <div class="menu-responsive" id="menu-responsive">
+            <div class="title-responsive" onclick="sidebarClose()">
+              <i class="fa-solid fa-caret-down fa-flip-vertical"  ></i>
               <p>Menu</p>
             </div>
             <div class="menu-responsive-links">

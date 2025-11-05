@@ -239,3 +239,17 @@ function Finalizar() {
 
   window.open(link, "_blank");
 }
+
+
+function sidebarOpen(){
+
+    document.getElementById("menu-responsive").style.display = "flex"
+ 
+
+}
+function sidebarClose(){
+ 
+    document.getElementById("menu-responsive").style.display = "none"
+   
+
+}
