@@ -17,6 +17,7 @@ header {
   padding-left: 50px;
   padding-right: 50px;
   background-color: #860c17;
+  position: relative;
 }
 .menu {
   display: flex;
@@ -287,7 +288,7 @@ main {
   position: relative;
   top: -10px;
   cursor: pointer;
-  color: rgb(163, 11, 11);
+  color: #a30b0b;
   transition: 500ms;
     padding: 20px;
 }
@@ -332,7 +333,7 @@ main {
   cursor: pointer;
 }
 .produto:hover {
-  width: 170px;
+  width: 140px;
   height: 315px;
   border: 1px rgba(131, 131, 131, 0.267) solid;
   position: relative;
@@ -410,7 +411,7 @@ main {
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  padding-left: 20px;
+  padding-left: 30px;
   padding-right: 30px;
   padding-top: 50px;
   gap: 30px;
@@ -451,6 +452,83 @@ width: 50px
   color: rgba(255, 255, 255, 0.767);
   
 }
+.conteudoCarrinho {
+  position: absolute;
+  width: 280px;
+  max-height: 400px;
+  background-color: rgb(255, 255, 255);
+  top: 30px;
+  left: -225px;
+  z-index: 999;
+  border-radius: 5px;
+  box-shadow: 2px 5px 15px 7px rgba(37, 37, 37, 0.11);
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+#imgCarrinho2{
+  height: 200px;
+}
+.menu-responsive{
+  position: fixed;
+  width: 150px;
+  height: 100vh;
+  top: 0;
+  background-color: #860c17;
+  z-index: 999;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+
+}
+
+.title-responsive{
+  display: flex;
+  flex-direction: row;
+  color: white;
+  font-family: "poppins";
+  font-size: 16px;
+  align-items: center;
+  gap: 5px;
+
+}
+.menu-responsive-links{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+  top: 30px;
+}
+
+.menu-responsive-links a{
+color: white;
+text-decoration: none;
+font-family: "open sans";
+font-size: 18px;
+}
+#contatoResponsive{
+  width: 120px;
+  padding: 10px;
+  border: none;
+  border-radius: 2px;
+  font-family: "poppins ";
+background-color:#d89721 ;
+color: white;
+font-weight: 500;
+
+}
+
+
+
 
 
 }

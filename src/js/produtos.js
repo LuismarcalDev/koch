@@ -84,8 +84,8 @@ async function ProdutoCarrinhoSolo(id) {
     div.setAttribute("data-id", item.id);
 
     div.innerHTML = `
-      <img src="${item.imagem}" alt="${item.nome}" />
-      <div>
+      <img id="imgCarrinho2" src="${item.imagem}" alt="${item.nome}" />
+      <div >
         <h4>${item.nome}</h4>
         <p id="viuvi">${item.descricao}</p>
         <p id="viuvi2">1X</p>
