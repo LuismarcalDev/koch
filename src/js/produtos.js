@@ -3,29 +3,63 @@ let valorSoma = [];
 let arrayProdutos = [];
 let numero = 1;
 let abrir = false;
-
 document.addEventListener("DOMContentLoaded", () => {
   carregarProdutos();
   carregarCarrinhoLocal();
 });
+function Categorias(categoria) {
+  let query = "";
+
+  if (categoria === "todas") {
+    query = `*[_type == "Produtos"]{
+      id,
+      nome,
+      preco,
+      "imagem": imagem.asset->url,
+      descricao,
+      categoria
+    }`;
+  } else {
+    query = `*[_type == "Produtos" && categoria == "${categoria}"]{
+      id,
+      nome,
+      preco,
+      "imagem": imagem.asset->url,
+      descricao,
+      categoria
+    }`;
+  }
+
+  api = `https://mck847sh.api.sanity.io/v2025-10-31/data/query/production?query=${encodeURIComponent(
+    query
+  )}&perspective=drafts`;
+  carregarProdutos();
+}
+
+window.onload = () => {
+  Categorias("todas");
+};
+
+document.getElementById("selectCategoria").addEventListener("change", (e) => {
+  Categorias(e.target.value);
+});
 
 async function carregarProdutos() {
-  const res = await fetch(
-    "https://mck847sh.api.sanity.io/v2025-10-30/data/query/production?query=*%5B_type+%3D%3D+%22Produtos%22%5D%7B%0A++id%2C%0A++nome%2C%0A++preco%2C%0A++%22imagem%22%3A+imagem.asset-%3Eurl%2C%0A++descricao%0A%7D%0A&perspective=drafts"
-  );
+  const res = await fetch(api);
   const data = await res.json();
   const produtos = data.result;
 
   const container = document.querySelector(".centralProdutos");
+  container.innerHTML = "";
 
   produtos.forEach((item) => {
     const produtoDiv = document.createElement("div");
     produtoDiv.classList.add("produto");
-      ScrollReveal().reveal(".produto", {
-  origin: "top",
-  duration: 2000,
-  distance: "1%",
-  });
+    ScrollReveal().reveal(".produto", {
+      origin: "top",
+      duration: 2000,
+      distance: "1%",
+    });
 
     const img = document.createElement("img");
     img.src = item.imagem || "https://via.placeholder.com/200";
@@ -54,8 +88,6 @@ async function carregarProdutos() {
 }
 
 async function ProdutoCarrinhoSolo(id) {
-
-
   const res = await fetch(
     `https://mck847sh.api.sanity.io/v2025-10-31/data/query/production?query=*%5B_type+%3D%3D+%22Produtos%22+%26%26+id+%3D%3D+${id}%5D+%7B%0A++id%2C%0A++nome%2C%0A++preco%2C%0A++%22imagem%22%3A+imagem.asset-%3Eurl%2C%0A++descricao%0A%7D%0A&perspective=`
   );
@@ -125,7 +157,9 @@ async function ProdutoCarrinhoSolo(id) {
 
 function atualizarTotal() {
   let soma = valorSoma.reduce((total, v) => total + v, 0);
-  document.getElementById("valorReal").innerText = `Total R$ ${soma.toFixed(2)}`;
+  document.getElementById("valorReal").innerText = `Total R$ ${soma.toFixed(
+    2
+  )}`;
 }
 
 function salvarCarrinhoLocal() {
@@ -137,7 +171,9 @@ function salvarCarrinhoLocal() {
       id: p.getAttribute("data-id"),
       nome: p.querySelector("h4").textContent,
       descricao: p.querySelector("#viuvi").textContent,
-      preco: parseFloat(p.querySelector("#valor").textContent.replace("R$", "")),
+      preco: parseFloat(
+        p.querySelector("#valor").textContent.replace("R$", "")
+      ),
       imagem: p.querySelector("img").src,
       quantidade: parseInt(p.querySelector("#viuvi2").textContent),
     });
@@ -224,7 +260,9 @@ function Finalizar() {
   produtosNoCarrinho.forEach((produto) => {
     const nome = produto.querySelector("h4").textContent;
     const qtd = produto.querySelector("#viuvi2").textContent.replace("X", "");
-    const precoTexto = produto.querySelector("#valor").textContent.replace("R$", "");
+    const precoTexto = produto
+      .querySelector("#valor")
+      .textContent.replace("R$", "");
     const preco = parseFloat(precoTexto);
 
     mensagem += `${qtd}x ${nome} - R$ ${preco.toFixed(2)}\n`;
@@ -240,16 +278,9 @@ function Finalizar() {
   window.open(link, "_blank");
 }
 
-
-function sidebarOpen(){
-
-    document.getElementById("menu-responsive").style.display = "flex"
- 
-
+function sidebarOpen() {
+  document.getElementById("menu-responsive").style.display = "flex";
 }
-function sidebarClose(){
- 
-    document.getElementById("menu-responsive").style.display = "none"
-   
-
+function sidebarClose() {
+  document.getElementById("menu-responsive").style.display = "none";
 }

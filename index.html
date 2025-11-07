@@ -90,7 +90,19 @@
         <hr />
       </div>
 
-      <div class="centralProdutos"></div>
+     <div>
+  <select name="categorias" id="selectCategoria" onchange="Categorias(this.value)">
+    <option value="todas">Categorias</option>
+    <option value="Linguiças">Linguiças</option>
+    <option value="Salames">Salames</option>
+    <option value="Defumados">Defumados</option>
+  </select>
+</div>
+
+    
+      <div class="centralProdutos">
+       
+      </div>
     </main>
     <script src="src/js/produtos.js"></script>
     <script src="src/js/animation.js"></script>

@@ -205,7 +205,23 @@ main {
   pointer-events: all;
 }
 
-
+select{
+  width: 250px;
+  padding: 10px;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  box-shadow: 2px 5px 15px rgba(34, 34, 34, 0.151);
+  font-family: "poppins";
+  gap: 2px;
+}
+select option{
+  color: black;
+  border: none;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+}
 .cont-Produtos {
   display: flex;
   flex-direction: column;
