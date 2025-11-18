@@ -3,10 +3,12 @@ let valorSoma = [];
 let arrayProdutos = [];
 let numero = 1;
 let abrir = false;
+
 document.addEventListener("DOMContentLoaded", () => {
   carregarProdutos();
   carregarCarrinhoLocal();
 });
+
 function Categorias(categoria) {
   let query = "";
 
@@ -33,6 +35,7 @@ function Categorias(categoria) {
   api = `https://mck847sh.api.sanity.io/v2025-10-31/data/query/production?query=${encodeURIComponent(
     query
   )}&perspective=drafts`;
+
   carregarProdutos();
 }
 
@@ -55,10 +58,11 @@ async function carregarProdutos() {
   produtos.forEach((item) => {
     const produtoDiv = document.createElement("div");
     produtoDiv.classList.add("produto");
+
     ScrollReveal().reveal(".produto", {
       origin: "top",
       duration: 2000,
-      distance: "1%",
+      distance: "2%",
     });
 
     const img = document.createElement("img");
@@ -75,6 +79,12 @@ async function carregarProdutos() {
     const descricao = document.createElement("p");
     descricao.textContent = item.descricao;
     descDiv.appendChild(descricao);
+
+    // ======== PREÇO SEM ESTILIZAÇÃO INLINE ========
+    const preco = document.createElement("p");
+    preco.textContent = "R$ " + item.preco;
+    preco.classList.add("preco-produto"); // <-- APENAS CLASS
+    descDiv.appendChild(preco);
 
     produtoDiv.appendChild(descDiv);
 
@@ -117,7 +127,7 @@ async function ProdutoCarrinhoSolo(id) {
 
     div.innerHTML = `
       <img id="imgCarrinho2" src="${item.imagem}" alt="${item.nome}" />
-      <div >
+      <div>
         <h4>${item.nome}</h4>
         <p id="viuvi">${item.descricao}</p>
         <p id="viuvi2">1X</p>
@@ -281,6 +291,7 @@ function Finalizar() {
 function sidebarOpen() {
   document.getElementById("menu-responsive").style.display = "flex";
 }
+
 function sidebarClose() {
   document.getElementById("menu-responsive").style.display = "none";
 }

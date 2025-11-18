@@ -40,6 +40,7 @@ header {
   border: none;
   border-radius: 10px;
 }
+
 main {
   width: 100%;
   min-height: calc(100vh - 89px);
@@ -70,7 +71,7 @@ main {
 }
 .produto {
   width: 250px;
-  height: 450px;
+  height: 460px;
   border: 1px rgba(131, 131, 131, 0.267) solid;
   position: relative;
   border-top-left-radius: 10px;
@@ -78,9 +79,15 @@ main {
   border-top-right-radius: 10px;
   cursor: pointer;
 }
+.preco-produto{
+  color: rgb(145, 81, 81);
+  font-weight: 500;
+  font-size: 14px;
+  
+}
 .produto:hover {
   width: 250px;
-  height: 450px;
+   height: 460px;
   border: 1px rgba(131, 131, 131, 0.267) solid;
   position: relative;
   border-top-left-radius: 10px;
@@ -335,8 +342,57 @@ select option{
   border-radius: 7px;
   width: 100px;
 }
+.footer-custom {
+  background-color: #9d1c23;
+  color: #fff;
+  padding: 40px 0;
+  text-align: center;
+  margin-top: 60px;
+}
 
+.footer-content {
+  margin-bottom: 10px;
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.footer-logo .line {
+  display: inline-block;
+  width: 50px;
+  height: 1px;
+  background-color: #fff;
+  margin: 0 10px;
+}
+
+.footer-logo .text-logo {
+  color: #e5b06d;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 2px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.slogan {
+  font-size: 14px;
+  margin: 0;
+  color: #d1d1d1;
+}
+
+.copyright {
+  font-size: 12px;
+  margin: 0;
+  color: #a0a0a0;
+}
  @media screen and (max-width: 768px)  {
+  .selectCategoria{
+    width: 100%;
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.247);
+  }
   .menu-responsive{
   display: flex;
 }
@@ -351,7 +407,7 @@ select option{
 
   .produto {
   width: 140px;
-  height: 315px;
+  height: 340px;
   border: 1px rgba(131, 131, 131, 0.267) solid;
   position: relative;
   border-top-left-radius: 10px;
@@ -361,7 +417,7 @@ select option{
 }
 .produto:hover {
   width: 140px;
-  height: 315px;
+  height: 340px;
   border: 1px rgba(131, 131, 131, 0.267) solid;
   position: relative;
   border-top-left-radius: 10px;
@@ -378,7 +434,15 @@ select option{
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-
+.preco-produto{
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 5px;
+  position: absolute;
+  top: 278px;
+  
+}
 .description {
   display: flex;
   align-items: center;
@@ -446,7 +510,22 @@ main {
   position: relative;
   padding-bottom: 20px;
 }
+.descricao button:hover {
+  background-color: #b8861a;
+}
 
+
+  .footer-custom {
+    padding: 20px 10px;
+  }
+
+  .footer-logo .text-logo {
+    font-size: 18px;
+  }
+
+  .slogan {
+    font-size: 12px;
+  }
 .title-Produto h2 {
   font-family: "poppins";
   font-weight: 600;
@@ -589,6 +668,38 @@ font-size: 18px;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
+.preco-produto{
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 5px;
+  position: absolute;
+  top: 400px;
+  
+}
+.produto {
+  width: 220px;
+  height: 470px;
+  border: 1px rgba(131, 131, 131, 0.267) solid;
+  position: relative;
+  border-top-left-radius: 10px;
+  box-shadow: 2px 5px 15px 3px rgba(99, 99, 99, 0.075);
+  border-top-right-radius: 10px;
+  cursor: pointer;
+}
+.produto:hover {
+ width: 220px;
+  height: 470px;
+  border: 1px rgba(131, 131, 131, 0.267) solid;
+  position: relative;
+  border-top-left-radius: 10px;
+  box-shadow: 2px 5px 15px 3px rgba(99, 99, 99, 0.075);
+  border-top-right-radius: 10px;
+  background-color: rgba(226, 226, 226, 0.425);
+  transition: 800ms;
+ 
+ 
+}
 
 }
 
@@ -608,15 +719,19 @@ font-size: 18px;
   left: 10px;
 
 }
+header{
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .menu a {
   color: white;
   text-decoration: none;
   font-family: "poppins";
-  font-size: 15px;
+  font-size: 12.5px;
 }
 .produto {
   width: 220px;
-  height: 400px;
+  height: 430px;
   border: 1px rgba(131, 131, 131, 0.267) solid;
   position: relative;
   border-top-left-radius: 10px;
@@ -626,7 +741,7 @@ font-size: 18px;
 }
 .produto:hover {
  width: 220px;
- height: 400px;
+ height: 430px;
   border: 1px rgba(131, 131, 131, 0.267) solid;
   position: relative;
   border-top-left-radius: 10px;
@@ -643,7 +758,15 @@ font-size: 18px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-
+.preco-produto{
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 5px;
+  position: absolute;
+  top: 360px;
+  
+}
 
 }
 
